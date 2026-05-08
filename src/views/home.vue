@@ -20,7 +20,9 @@
          </div>
         </el-card>
          <el-card shadow="hover" class="user-table">
-        
+        <!-- 点击直接打开PDF -->
+<a href="/陈春溢-26届.pdf" target="_blank">查看我的简历PDF</a>
+
         </el-card>
     </el-col>
     
