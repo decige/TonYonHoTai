@@ -20,6 +20,14 @@
          </div>
         </el-card>
          <el-card shadow="hover" class="user-table">
+            <el-table :data="tableData" >
+            <el-table-column
+            v-for="(val,key) in tableLabel" :key="key" :prop="key" :label="val"
+            >
+         
+         </el-table-column>
+            </el-table>
+           
         <!-- 点击直接打开PDF -->
 <a href="/陈春溢-26届.pdf" target="_blank">查看我的简历PDF</a>
 
@@ -103,5 +111,8 @@ const tableLabel = ref({
          }
       }
    }
+}
+.user-table{
+   margin-top: 20px;
 }
 </style>
