@@ -27,10 +27,6 @@
          
          </el-table-column>
             </el-table>
-           
-        <!-- 点击直接打开PDF -->
-<a href="/陈春溢-26届.pdf" target="_blank">查看我的简历PDF</a>
-
         </el-card>
     </el-col>
     
