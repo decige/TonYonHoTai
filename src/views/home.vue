@@ -35,6 +35,7 @@
 </template>
 <script setup>
 import {ref} from "vue"
+import axios from "axios"
 function getImageUrl(name) {
   return new URL(`../assets/image/${name}.png`, import.meta.url).href;
 }
@@ -59,6 +60,13 @@ const tableLabel = ref({
     todayBuy: "今日购买",
     monthBuy: "本月购买",
     totalBuy: "总购买",
+})
+axios({
+      method: "get",
+      url: "/api/getTableData",
+}).then(res=>{
+   console.log(res.data);
+
 })
 </script>
 <style scoped lang="less">
