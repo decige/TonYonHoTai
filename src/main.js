@@ -8,6 +8,9 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createPinia } from 'pinia'
+import  axios from "axios"
+//注释mock就失效了
+import "@/api/mock.js";
 
 const pinia = createPinia()
 

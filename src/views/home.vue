@@ -45,14 +45,8 @@ const tableData = ref([
         name: "Java",
         todayBuy: 100,
         monthBuy: 200,
-        totalBuy: 300,
+        totalBuy: 3000,
     },
-    {
-        name: "Python",
-        todayBuy: 100,
-        monthBuy: 200,
-        totalBuy: 300,
-    }
 ])
 
 const tableLabel = ref({
@@ -61,13 +55,25 @@ const tableLabel = ref({
     monthBuy: "本月购买",
     totalBuy: "总购买",
 })
+
 axios({
       method: "get",
       url: "/api/getTableData",
 }).then(res=>{
    console.log(res.data);
+   if(res.data.code === 200){
+      tableData.value = res.data.data.tableData
+      console.log("tableData=",tableData.value);
+   }
 
-})
+}) .catch(function (error) {
+    // 处理错误情况
+    console.log(error);
+  })
+  .finally(function () {
+    // 总是会执行
+    console.log("请求拦截完成，mock数据已返回");
+  });
 </script>
 <style scoped lang="less">
 .home-wrapper {
