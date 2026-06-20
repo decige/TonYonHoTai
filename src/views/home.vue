@@ -34,46 +34,54 @@
 
 </template>
 <script setup>
-import {ref} from "vue"
-import axios from "axios"
+import {ref,getCurrentInstance,onMounted} from "vue"
+const {proxy} = getCurrentInstance();//此时proxy.api就等于api.js中定义的函数了,proxy.$api 等价于 import api from '@/api' 拿到的对象
 function getImageUrl(name) {
   return new URL(`../assets/image/${name}.png`, import.meta.url).href;
 }
+//声明
+const tableData = ref([]);
+const tableLabel = ref({});
 //这个tableData是假数据，等会我们使用axios请求mock数据
-const tableData = ref([
-    {
-        name: "Java",
-        todayBuy: 100,
-        monthBuy: 200,
-        totalBuy: 3000,
-    },
-])
+// const tableData = ref([
+//     {
+//         name: "Java",
+//         todayBuy: 100,
+//         monthBuy: 200,
+//         totalBuy: 3000,
+//     },
+// ])
 
-const tableLabel = ref({
-    name: "课程",
-    todayBuy: "今日购买",
-    monthBuy: "本月购买",
-    totalBuy: "总购买",
-})
+// const tableLabel = ref({
+//     name: "课程",
+//     todayBuy: "今日购买",
+//     monthBuy: "本月购买",
+//     totalBuy: "总购买",
+// })
+//先外部定义好函数，等会在onMounted生命周期函数中调用
+const getTabData=async()=>{
+      const data = await proxy.$api.getTableData();
+      console.log(data);
+      tableData.value = data.tableData;
+  
+}
+const getTabLabel=async()=>{
+      const data = await proxy.$api.getTableLabel();
+      console.log(data);
+      tableLabel.value = data.tableLabel;
+  
+}
+//使用onMounted生命周期函数，格式onMounted( 回调函数 )，最好在外部定义好函数，回调函数直接调用就行了，因为如果有多个函数要调用就都放里面
+onMounted(() => {
+   //要调用的函数
+   getTabData();
+   getTabLabel();
 
-axios({
-      method: "get",
-      url: "/api/getTableData",
-}).then(res=>{
-   console.log(res.data);
-   if(res.data.code === 200){
-      tableData.value = res.data.data.tableData
-      console.log("tableData=",tableData.value);
-   }
+}
 
-}) .catch(function (error) {
-    // 处理错误情况
-    console.log(error);
-  })
-  .finally(function () {
-    // 总是会执行
-    console.log("请求拦截完成，mock数据已返回");
-  });
+
+)
+
 </script>
 <style scoped lang="less">
 .home-wrapper {

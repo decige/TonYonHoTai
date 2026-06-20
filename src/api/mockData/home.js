@@ -17,6 +17,42 @@ export default {
                     todayBuy: 100,
                     monthBuy: 200,
                      totalBuy: 300
+                 },
+                  {
+                    name: "Python",
+                    todayBuy: 100,
+                    monthBuy: 200,
+                     totalBuy: 300
+                 },
+                  {
+                    name: "Python",
+                    todayBuy: 100,
+                    monthBuy: 200,
+                     totalBuy: 300
+                 },
+                  {
+                    name: "Python",
+                    todayBuy: 100,
+                    monthBuy: 200,
+                     totalBuy: 300
+                 },
+                  {
+                    name: "Python",
+                    todayBuy: 100,
+                    monthBuy: 200,
+                     totalBuy: 300
+                 },
+                  {
+                    name: "Python",
+                    todayBuy: 100,
+                    monthBuy: 200,
+                     totalBuy: 300
+                 },
+                  {
+                    name: "Python",
+                    todayBuy: 100,
+                    monthBuy: 200,
+                     totalBuy: 300
                  }
                 ]
             }
