@@ -1,6 +1,9 @@
 import axios from "axios";
+import config from"@/config";
 import { ElMessage } from "element-plus";
-const service = axios.create();
+const service = axios.create({
+  baseURL: config.baseApi
+});
 const NETWORK_ERROR = "网络异常，请稍后再试！";
 // 添加请求拦截器
 service.interceptors.request.use(function (config) {
@@ -35,6 +38,21 @@ service.interceptors.response.use(
   
   function request(options){
     options.method = options.method || "get";
+    //关于get请求参数转化，使不管get,post都传参用data
+    if(options.method.toLowerCase()==="get"){
+      options.params=options.data;
+    }
+
+    let isMock=config.mock;
+    if(typeof options.mock!="undefined"){
+      isMock=options.mock;
+
+    }
+    if(config.env==="prod"){
+      service.defaults.baseURL=config.baseApi;
+    }else{
+       service.defaults.baseURL=isMock ? config.mockApi:config.baseApi;
+    }
     return service(options); 
   }
   //暴露出去直接用request,在组件中就可以直接使用这个函数来发送请求了,比如 this.$api.getTableData() 就可以了

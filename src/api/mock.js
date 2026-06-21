@@ -18,5 +18,7 @@ import homeApi from "./mockData/home.js";
 //     }
 //   ]
 // });
-Mock.mock("/api/getTableData", "get",homeApi.getTableData);
-Mock.mock("/api/getTableLabel", "get", homeApi.getTableLabel);
+Mock.mock("/api/getTable", "get",homeApi.getTableData);
+Mock.mock("/api/home/getTableLabel", "get", homeApi.getTableLabel);
+Mock.mock("/api/home/getCountData", "get", homeApi.getCountData);
+Mock.mock("/api/home/getChartData", "get", homeApi.getChartData);

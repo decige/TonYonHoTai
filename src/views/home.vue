@@ -1,6 +1,7 @@
 <template>
-<!-- gutter把一行总共分成 20 等份，span 就是占几份。 -->
+<!-- Element Plus 默认把一行分成 24 等份，span 表示占几份，gutter 是列之间的间距 -->
     <el-row class="home" :gutter="20">
+      <!-- row里的col水平排列，col里的元素垂直排列 -->
       <!-- 左侧 -->
    <el-col :span="8" style="margin-top: 20px;">
         <el-card class="hover">
@@ -29,39 +30,79 @@
             </el-table>
         </el-card>
     </el-col>
+    <el-col :span="16" style="margin-top: 20px;">
+       <div class="num-box">
+          <el-card :body-style="{ padding: '0',display:'flex'}" 
+         v-for="item in countData " :key="item.name">
+         <component :is="item.icon" class="icon" :style="{background:item.color}">
+
+         </component>
+         <div class="detail">
+              <p class="num">@{{ item.value }} </p>
+              <p class="txt">@{{ item.name }} </p>
+            
+         </div>
+        </el-card>
+       </div>
+
+       <el-card class="top-echart">
+         <div ref="echart" style="height: 260px;">
+
+         </div>
+
+       </el-card>
+
+    <div class="graph">
+      <el-crad>
+         <div class="" style="height: 100px;"></div>
+      </el-crad>
+    </div>
     
-  </el-row>
+       
+   </el-col>
+    
+  </el-row >
 
 </template>
+
 <script setup>
 import {ref,getCurrentInstance,onMounted} from "vue"
+import * as echarts from 'echarts'
 const {proxy} = getCurrentInstance();//此时proxy.api就等于api.js中定义的函数了,proxy.$api 等价于 import api from '@/api' 拿到的对象
 function getImageUrl(name) {
   return new URL(`../assets/image/${name}.png`, import.meta.url).href;
 }
+//折线图
+const option = {
+  xAxis: {
+    data: ['A', 'B', 'C', 'D', 'E']
+  },
+  yAxis: {},
+  series: [
+    {
+      data: [10, 22, 28, 43, 49],
+      type: 'line',
+      stack: 'x'
+    },
+    {
+      data: [5, 4, 3, 5, 10],
+      type: 'line',
+      stack: 'x'
+    }
+  ]
+};
+
 //声明
 const tableData = ref([]);
 const tableLabel = ref({});
+const countData = ref([]);
+const chartData=ref([]);
 //这个tableData是假数据，等会我们使用axios请求mock数据
-// const tableData = ref([
-//     {
-//         name: "Java",
-//         todayBuy: 100,
-//         monthBuy: 200,
-//         totalBuy: 3000,
-//     },
-// ])
 
-// const tableLabel = ref({
-//     name: "课程",
-//     todayBuy: "今日购买",
-//     monthBuy: "本月购买",
-//     totalBuy: "总购买",
-// })
 //先外部定义好函数，等会在onMounted生命周期函数中调用
 const getTabData=async()=>{
       const data = await proxy.$api.getTableData();
-      console.log(data);
+      console.log("数据data:", data);
       tableData.value = data.tableData;
   
 }
@@ -71,12 +112,28 @@ const getTabLabel=async()=>{
       tableLabel.value = data.tableLabel;
   
 }
+const getCountData=async ()=>{//async函数的作用是让函数内部可以使用await来等待异步操作完成
+      const data = await proxy.$api.getCountData();
+     console.log(data);
+      countData.value = data.countData;
+      console.log(countData.value);
+  
+} 
+const getChartData=async ()=>{//async函数的作用是让函数内部可以使用await来等待异步操作完成
+      const {orderData} = await proxy.$api.getChartData();
+      //对第一个图表数据进行处理，echarts要求x轴和y轴的数据是两个数组，所以我们要把orderData中的date和data分别取出来
+      const xData = orderData.date;
+      const yData = orderData.data;
+     const oneEchart=echarts.init(proxy.$refs['echart'])
+  
+} 
 //使用onMounted生命周期函数，格式onMounted( 回调函数 )，最好在外部定义好函数，回调函数直接调用就行了，因为如果有多个函数要调用就都放里面
 onMounted(() => {
    //要调用的函数
    getTabData();
    getTabLabel();
-
+   getCountData();
+   getChartData();
 }
 
 
@@ -133,4 +190,39 @@ onMounted(() => {
 .user-table{
    margin-top: 20px;
 }
+.num-box{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+   .el-card{
+      width: 30%;
+      margin-bottom: 20px;
+   }
+      .icon{
+         width: 80px;
+         height: 80px;
+         font-size: 30px;
+         text-align: center;
+         line-height: 80px;
+         color: #ec6d6d;
+         
+      }
+      .detail{
+         margin-left: 15px;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         .num{
+            font-size: 30px;
+            margin-bottom: 10px;
+         }
+         .txt{
+            color:#999;
+            font-size: 14px;
+            text-align: center;
+         }
+      }
+   
+
+} 
 </style>

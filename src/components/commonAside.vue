@@ -30,7 +30,7 @@
           <el-menu-item-group v-for="(subItme,subIndex) in itme.children" :key="subItme.path" :index="subItme.path">
             
             <!-- <component class="icons" :is="subItme.icon" /> -->
-            <el-menu-item >{{ subItme.label }}</el-menu-item>
+            <el-menu-item :index="subItme.path">{{ subItme.label }}</el-menu-item>
           </el-menu-item-group>
         </el-sub-menu>
        
