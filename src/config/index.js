@@ -7,8 +7,10 @@ const EnvConfig={
     },
     
     test:{
-        baseApi:"//test.future.com/api",
-        mockApi:"https://apifoxmock.com/m1/4068509-0-default/api"
+        // baseApi:"//test.future.com/api",
+        // mockApi:"https://apifoxmock.com/m1/4068509-0-default/api"
+        baseApi:"/api",
+        mockApi:"/api"
     },
     prod:{
         // baseApi:"//future.com/api",
