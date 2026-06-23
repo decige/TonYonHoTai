@@ -46,13 +46,8 @@ service.interceptors.response.use(
     let isMock=config.mock;
     if(typeof options.mock!="undefined"){
       isMock=options.mock;
-
     }
-    // if(config.env==="prod"){
-    //   service.defaults.baseURL=config.baseApi;
-    // }else{
-    //    service.defaults.baseURL=isMock ? config.mockApi:config.baseApi;
-    // }
+    service.defaults.baseURL=isMock ? config.mockApi:config.baseApi;
     return service(options); 
   }
   //暴露出去直接用request,在组件中就可以直接使用这个函数来发送请求了,比如 this.$api.getTableData() 就可以了

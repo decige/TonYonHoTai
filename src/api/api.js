@@ -9,7 +9,7 @@ export default {
            // url:"/getTable",
            url:"/getTable",
             method:"get",
-            mock:true, //true,就会使用mockApi这个地址,如果false,就会使用baseApi这个地址
+           // mock:true, //true,就会使用mockApi这个地址,如果false,就会使用baseApi这个地址
         })
      },
      getTableLabel(){
@@ -17,7 +17,7 @@ export default {
             url:"/home/getTableLabel",
             method:"get",
             //true,就会使用mockApi这个地址,如果false,就会使用baseApi这个地址
-            mock:false,
+           // mock:false,
         })
      },
      getCountData(){
@@ -25,7 +25,7 @@ export default {
             url:"/home/getCountData",
             method:"get",
             //true,就会使用mockApi这个地址,如果false,就会使用baseApi这个地址
-            mock:true,
+            // mock:true,
         })
      },
       getChartData(){
@@ -33,7 +33,7 @@ export default {
             url:"/home/getChartData",
             method:"get",
             //true,就会使用mockApi这个地址,如果false,就会使用baseApi这个地址
-            mock:true,
+            // mock:true,
         })
      }
     
