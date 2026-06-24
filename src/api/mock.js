@@ -18,7 +18,9 @@ import homeApi from "./mockData/home.js";
 //     }
 //   ]
 // });
-Mock.mock("/api/getTable", "get",homeApi.getTableData);
-Mock.mock("/api/home/getTableLabel", "get", homeApi.getTableLabel);
-Mock.mock("/api/home/getCountData", "get", homeApi.getCountData);
-Mock.mock("/api/home/getChartData", "get", homeApi.getChartData);
+import userApi from "./mockData/user.js"
+Mock.mock("/api/getTable", "get",homeApi.getTableData);//品牌数据
+Mock.mock("/api/home/getTableLabel", "get", homeApi.getTableLabel);//表格头
+Mock.mock("/api/home/getCountData", "get", homeApi.getCountData);//月付
+Mock.mock("/api/home/getChartData", "get", homeApi.getChartData);//图表
+Mock.mock("/api/home/getUserData", "get", userApi.getUserList);//用户
