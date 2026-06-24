@@ -8,7 +8,7 @@
      :collapse-transition="false"
      >
       <h3 v-show="!isCollapse">通用后台管理系统</h3>
-      <h3 v-show="isCollapse">通用后台</h3>
+      <h3 v-show="isCollapse" >通用后台</h3>
       <el-menu-item v-for="itme in noChhildren" :key="itme.path" :index="itme.path">
 
           <component class="icons" :is="itme.icon" />
