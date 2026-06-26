@@ -17,6 +17,19 @@ const routes=[
              path:"user",
              name:"user",
             component:()=>import("../views/User.vue")
+        },
+         {
+             path:"mall",
+             name:"mall",
+            component:()=>import("../views/mall.vue")
+        }, {
+             path:"page1",
+             name:"page1",
+            component:()=>import("../views/page1.vue")
+        }, {
+             path:"page2",
+             name:"page2",
+            component:()=>import("../views/page2.vue")
         }
     ]
     },

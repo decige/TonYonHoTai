@@ -1,15 +1,21 @@
 <template>
  
     <el-aside width="width" >
+      <!-- 在el-menu 上添加 :router="true" ：然后 el-menu-item 的 :index 会自动作为路由路径跳转。 -->
      <el-menu 
      text-color="#fff"
      background-color="#545c64"
      :collapse="isCollapse"
      :collapse-transition="false"
+     :router="true"
      >
       <h3 v-show="!isCollapse">通用后台管理系统</h3>
       <h3 v-show="isCollapse" >通用后台</h3>
-      <el-menu-item v-for="itme in noChhildren" :key="itme.path" :index="itme.path">
+      <el-menu-item v-for="itme in noChhildren" 
+      :key="itme.path" 
+      :index="itme.path"
+      
+      >
 
           <component class="icons" :is="itme.icon" />
           <span>{{ itme.label }}</span>
@@ -18,7 +24,7 @@
         <el-sub-menu v-for="itme in hasChildren" :key="itme.path" :index="itme.path">
           <template #title>
             <component class="icons" :is="itme.icon" />
-            <span>{{ itme.label }}</span>
+            <span>{{ itme.label }}</span> 
           </template>
           <!-- <el-menu-item-group
           v-for="(subItme,subIndex) in itme.children" :key="subItme.path" :index="subItme.path"

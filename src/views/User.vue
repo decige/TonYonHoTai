@@ -2,12 +2,12 @@
     <div class="user-header">
         <el-button type="primary" >新增</el-button>
         <!-- el-form-item默认垂直布局，加上inline属性就变成水平布局 -->
-        <el-form :inline="true">
+        <el-form :inline="true" :model="formInline">
             <el-form-item label="请输入">
-                <el-input placeholder="请输入用户名" width="20px"></el-input>
+                <el-input placeholder="请输入用户名" width="20px" v-model="formInline.keyword"></el-input>
             </el-form-item>
             <el-form-item >
-                <el-button type="primary" >搜索</el-button>
+                <el-button type="primary" @click="handleSearch">搜索</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -23,7 +23,7 @@
     
     <el-table-column fixed="right" label="Operations" min-width="120">
       <template #default>
-        <el-button type="primary" size="small" @click="handleClick">
+        <el-button type="primary" size="small" >
           编辑
         </el-button>
         <el-button type="danger" size="small">删除</el-button>
@@ -34,20 +34,28 @@
 </template>
 <script setup >
 import {ref,getCurrentInstance,onMounted, reactive} from "vue"
-const handleClick = () => {
-  console.log('click')
+const config=reactive({
+    name:''
+})
+const handleSearch = () => {
+    config.name=formInline.keyword
+    getUserData()
 }
-
+const formInline=reactive({
+    keyword:''
+})
 const tableData = ref([])
 const {proxy}=getCurrentInstance()
+
 const getUserData=async ()=>{
-    let data=await proxy.$api.getUserData()
+    let data=await proxy.$api.getUserData(config)
     console.log(data)
     tableData.value=data.list.map(item=>({
         ...item,
         sexLabel : item.sex===1?'男' : '女'
     }))
 }
+
 const tableLabel=reactive([
     {
         prop:'name',
