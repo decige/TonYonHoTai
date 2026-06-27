@@ -7,8 +7,8 @@
         <el-card class="hover">
          <!-- 分俩个div上下 -->
          <div class="user">
-            <!-- 传入图片名字，返回图片地址函数以写 -->
-            <img :src="getImageUrl('user')" class="user">
+            <!-- 传入图片名字，返回图片地址，函数以写好 -->
+            <img :src="getImageUrl('gyl')" class="user">
             <div class="user-info">
                <p class="user-info-admin">Admin</p>
             <p class="user-info-p">超级管理员</p>
@@ -54,7 +54,7 @@
 
     <div class="graph">
       <el-crad>
-         <div class="" style="height: 10px;">啊啊啊啊</div>
+         <div class="" style="height: 10px;"></div>
       </el-crad>
     </div>
     

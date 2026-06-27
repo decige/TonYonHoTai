@@ -13,7 +13,7 @@
         <div class="r-content">
  <el-dropdown>
     <span class="el-dropdown-link">
-    <img :src="getImageUrl(`user`)" class="user">
+    <img :src="getImageUrl(`gyl`)" class="user">
 
     </span>
     <template #dropdown>

@@ -9,7 +9,7 @@
                 <common-header></common-header>
             </el-header>
             <el-main class="rigth-main">
-                <!-- 放置内容组件 -->
+                <!-- 路由组件显示 -->
                 <router-view></router-view>
             </el-main>
         </el-container>
